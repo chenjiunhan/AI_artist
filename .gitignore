@@ -1,2 +1,7 @@
 MNIST_data/
-img/
+data/
+log/
+checkpoints/
+result/
+training_data/
+image_data/
