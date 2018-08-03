@@ -2,8 +2,8 @@ import os
 import scipy.misc
 import numpy as np
 
-I_H = 80
-I_W = 120
+I_H = 480
+I_W = 640
 
 image_dir = "image_data/"
 training_dir = "training_data/"
@@ -15,7 +15,7 @@ for image_file in os.listdir(image_dir):
     save_path = training_dir + os.path.splitext(image_file)[0] + ".png"
     image = scipy.misc.imread(image_path)
     image = scipy.misc.imresize(image, (I_H, I_W)) / 255.
-    images += [image]    
+    images += [image]
     #print(image)
     #scipy.misc.imshow(image)
     #scipy.misc.imsave(save_path, image)

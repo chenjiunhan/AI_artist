@@ -5,3 +5,9 @@ checkpoints/
 result/
 training_data/
 image_data/
+material/
+chrome_theme/
+.*.swp
+*.npy
+*.swo
+*.swn

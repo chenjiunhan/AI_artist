@@ -4,13 +4,14 @@ import scipy.misc
 import numpy as np
 
 result_dir = "result/"
-RESTORE = True
+RESTORE = False
+TEST = False
 
 mnist = np.load('images.npy')
 #mnist = np.load('cifar.npy')
 
-I_H = 80
-I_W = 120
+I_H = 480
+I_W = 640
 
 F_I_H = int(I_H / 8)
 F_I_W = int(I_W / 8)
@@ -196,15 +197,16 @@ def train(real_placeholder,fake_placeholder,g_train_opt,d_train_opt,epoches,nois
             saver.save(sess,'./checkpoints/generator.ckpt',global_step=global_step_)
 
 
+with tf.device('/cpu:0'):
+    #with tf.Graph().as_default():
 
-with tf.Graph().as_default():
-
-    real_img,fake_img=input_placeholder([-1,I_H,I_W,3],noise_size=100)
+    real_img,fake_img=input_placeholder([-1,I_H,I_W,3],noise_size=20)
 
     g_loss,d_loss=inference(real_img,fake_img)
     summary = tf.summary.merge_all()
     g_train_opt,d_train_opt=get_optimizer(g_loss,d_loss)
 
     saver=tf.train.Saver()
-    train(real_img,fake_img,g_train_opt,d_train_opt,epoches=20,noise_size=100,batch_size=10)
+    if not TEST:
+        train(real_img,fake_img,g_train_opt,d_train_opt,epoches=50,noise_size=20,batch_size=1)
     test(fake_img,num_images=25)
