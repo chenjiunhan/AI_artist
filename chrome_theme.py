@@ -42,7 +42,7 @@ if len(sys.argv) != 2:
     print("Length of sys.argv is not correct.")
     exit(0)
 name = sys.argv[1]
-material_path = "material" + os.sep + name + os.sep + name + ".npy"
+material_path = "colors" + os.sep + name + os.sep + name + ".npy"
 colors = np.load(material_path).tolist()
 print(colors)
 base_dir = "chrome_theme" + os.sep + name + os.sep
